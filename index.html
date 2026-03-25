@@ -292,8 +292,10 @@
       statusText.style.color = "#a29bfe";
       sendToESP({mode: 3}); // ISS 궤도 재현
     } else if (mode === 'equator') {
+      targetImg.style.backgroundImage = "url('issproject/equator.jpg')";
       sendToESP({mode: 4}); // 적도 공전
     } else if (mode === 'korea orbit') {
+      targetImg.style.backgroundImage = "url('issproject/37latitude.jpg')";
       sendToESP({mode: 5}); // 37도 공전
     }
   }
