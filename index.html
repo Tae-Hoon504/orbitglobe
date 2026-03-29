@@ -85,7 +85,10 @@
     /* 오른쪽 섹션 (제어판) */
     .control-panel { flex: 1; min-width: 450px; padding: 2vw; /* 고정 px 대신 화면 너비에 비례한 여백을 줍니다 */ display: flex; flex-direction: column; 
     align-items: center; justify-content: center; 
-    gap: 2vh; /* [꿀팁] 요소들 사이의 위아래 간격을 화면 높이에 비례해서 벌려줍니다 */}
+    gap: 2vh; /* [꿀팁] 요소들 사이의 위아래 간격을 화면 높이에 비례해서 벌려줍니다 */
+    /* [핵심 추가] 왼쪽 패널보다 무조건 앞으로 오게 설정 */
+    position: relative; 
+    z-index: 10;}
 
     /* 이미지 박스: 지도 크기(360x180)와 동일하게 수정 */
     .iss-img-box { width: 30vw;    /* 360px 대신 화면 너비의 35%만큼 커지게 설정 */
