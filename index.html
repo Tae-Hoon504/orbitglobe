@@ -326,16 +326,6 @@ console.log("수신 데이터:", data); // 모든 데이터를 콘솔에 기록
 
                // --- 1. 메시지 처리 ---
 if (data.msg) {
-  const statusText = document.getElementById('modeStatus');
-                  const currentMsg = statusText.innerText;
-
-                  // [방어막] '초기화 중'일 때는 아두이노의 중간 메시지(진행, 이동 등)가 화면을 덮어쓰지 못하게 차단!
-                  // 오직 "Ready" 신호가 왔을 때만 통과시킵니다.
-                  if (currentMsg.includes("● 초기화 중") && data.msg !== "Ready") {
-                    // 아무것도 안 하고 함수를 여기서 중단시킵니다. (기존 "초기화 중" 글자 유지)
-                    return; 
-                  }
-  
   let displayMsg = data.msg;
 
   // [수정] 들어온 영문 메시지를 한글로 치환
