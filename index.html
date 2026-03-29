@@ -331,7 +331,7 @@ if (data.msg) {
 
                   // [방어막] '초기화 중'일 때는 아두이노의 중간 메시지(진행, 이동 등)가 화면을 덮어쓰지 못하게 차단!
                   // 오직 "Ready" 신호가 왔을 때만 통과시킵니다.
-                  if (currentMsg.includes("초기화") && data.msg !== "Ready") {
+                  if (currentMsg.includes("● 초기화 중") && data.msg !== "Ready") {
                     // 아무것도 안 하고 함수를 여기서 중단시킵니다. (기존 "초기화 중" 글자 유지)
                     return; 
                   }
