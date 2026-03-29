@@ -215,9 +215,6 @@
   let autoUpdateInterval;
   let isUserAdjusting = false;
   let isLocked = true; // [수정] 처음부터 잠긴 상태로 시작합니다!
-  // 페이지 로드 직후 실행하여 USB 연결 버튼 외 모두 잠금
-controlLock(true); 
-document.getElementById('modeStatus').innerText = "● USB 연결이 필요합니다.";
 
   let isCustomImageUploaded = false; // 커스텀 이미지 업로드 여부 저장
   let customImageUrl = "";           // 업로드된 이미지 데이터 저장
@@ -492,6 +489,9 @@ function uploadUserImage(event) {
     reader.readAsDataURL(file);
   }
 }
+  // 페이지 로드 직후 실행하여 USB 연결 버튼 외 모두 잠금
+controlLock(true); 
+document.getElementById('modeStatus').innerText = "● USB 연결이 필요합니다.";
 </script>
 </body>
 </html>
