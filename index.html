@@ -304,9 +304,18 @@ function controlLock(isLockedNow) {
                 const data = JSON.parse(line);
                 const statusText = document.getElementById('modeStatus');
 
-                // --- 1. 메시지 처리 ---
-                if (data.msg) {
-                  statusText.innerText = "● " + data.msg;
+               // --- 1. 메시지 처리 ---
+if (data.msg) {
+  let displayMsg = data.msg;
+
+  // [수정] 들어온 영문 메시지를 한글로 치환
+  if (displayMsg === "Ready") {
+    displayMsg = "대기 중";
+  } else if (displayMsg === "resetting to home") {
+    displayMsg = "초기화 중";
+  }
+
+  statusText.innerText = "● " + displayMsg; // 화면에는 한글로 표시
 
                   // 상태별 색상 변경
                   if (data.msg === "Ready" || data.msg.includes("완료") || data.msg.includes("완주")) {
