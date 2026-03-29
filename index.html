@@ -335,7 +335,11 @@ if (data.msg) {
   statusText.innerText = "● " + displayMsg; // 화면에는 한글로 표시
 
                   // 상태별 색상 변경
-                  if (data.msg === "Ready" || data.msg.includes("완료") || data.msg.includes("완주")) {
+                  // [수정] 초기화 관련 키워드가 있으면 무조건 빨간색으로 설정
+  if (displayMsg.includes("초기화") || data.msg.includes("Resetting")) {
+    statusText.style.color = "#ff4d4d"; // 버튼 테두리와 통일된 빨간색
+  }
+                  else if (data.msg === "Ready" || data.msg.includes("완료") || data.msg.includes("완주")) {
                     statusText.style.color = "#00ff00"; 
                     if (data.msg === "Ready") controlLock(false);
                   } 
