@@ -257,10 +257,10 @@ function controlLock(isLockedNow) {
   });
 
   // 상태 메시지 표시
-  if (isLockedNow && port) {
-    statusText.innerText = "● [SYSTEM BUSY] 명령 처리 중...";
-    statusText.style.color = "#ffca28"; // 대기 중인 노란색
-  }
+  // if (isLockedNow && port) {
+  //   statusText.innerText = "● [SYSTEM BUSY] 명령 처리 중...";
+  //   statusText.style.color = "#ffca28"; // 대기 중인 노란색
+  // }
 }
    
   // 1. [최종 수정] USB 시리얼 연결 함수
@@ -482,8 +482,6 @@ function sendManualCommand() {
     // 초기화 명령(mode 0) 전송
     sendToESP({mode: 0, tLat: 0, tLon: 0, reset: 1});
 
-    document.getElementById('modeStatus').innerText = "● 시스템 대기 중 (원점 복귀)";
-    document.getElementById('modeStatus').style.color = "#ff4d4d";
   }
 
   function previewUI() {
