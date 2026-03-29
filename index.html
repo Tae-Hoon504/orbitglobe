@@ -229,18 +229,20 @@ function controlLock(isLockedNow) {
   const statusText = document.getElementById('modeStatus');
 
   buttons.forEach(btn => {
-    // USB 연결 버튼은 어떤 상황에서도 '잠금'에서 제외!
+    // USB 연결 버튼은 무조건 살려둡니다.
     if (btn.classList.contains('usb-connect-btn')) {
-      btn.disabled = false;           // 무조건 활성화
-      btn.style.opacity = "1.0";      // 무조건 밝게
-      btn.style.cursor = "pointer";    // 무조건 손가락 모양
-      btn.style.pointerEvents = "auto"; // 무조건 클릭 가능
-    } else {
-      // 나머지 버튼들만 잠금/해제
-      btn.disabled = isLockedNow;
-      btn.style.opacity = isLockedNow ? "0.5" : "1.0";
-      btn.style.cursor = isLockedNow ? "not-allowed" : "pointer";
+      btn.disabled = false;
+      btn.style.opacity = "1.0";
+      btn.style.cursor = "pointer";
+      btn.style.pointerEvents = "auto"; 
+      return; // USB 버튼이면 여기서 로직 종료 (다음 버튼으로 넘어감)
     }
+
+    // 나머지 버튼들만 잠금/해제
+    btn.disabled = isLockedNow;
+    btn.style.opacity = isLockedNow ? "0.5" : "1.0";
+    btn.style.cursor = isLockedNow ? "not-allowed" : "pointer";
+    btn.style.pointerEvents = isLockedNow ? "none" : "auto";
   });
 
   sliders.forEach(s => {
@@ -248,7 +250,7 @@ function controlLock(isLockedNow) {
   });
 
   // 상태 메시지 표시
-  if (isLockedNow) {
+  if (isLockedNow && port) {
     statusText.innerText = "● [SYSTEM BUSY] 명령 처리 중...";
     statusText.style.color = "#ffca28"; // 대기 중인 노란색
   }
@@ -489,9 +491,19 @@ function uploadUserImage(event) {
     reader.readAsDataURL(file);
   }
 }
-  // 페이지 로드 직후 실행하여 USB 연결 버튼 외 모두 잠금
-controlLock(true); 
-document.getElementById('modeStatus').innerText = "● USB 연결이 필요합니다.";
+  
+ // 스크립트 맨 마지막 부분
+window.onload = function() {
+  // 1. 일단 모든 제어기를 잠급니다 (USB 버튼 제외)
+  controlLock(true); 
+  
+  // 2. 초기 메시지를 '연결 필요'로 설정합니다.
+  const statusText = document.getElementById('modeStatus');
+  statusText.innerText = "● USB 연결이 필요합니다.";
+  statusText.style.color = "#ffca28"; 
+  
+  console.log("ISS Tracker 시스템 준비 완료 - USB 연결을 기다리는 중");
+};
 </script>
 </body>
 </html>
